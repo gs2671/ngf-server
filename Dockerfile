@@ -13,7 +13,7 @@ RUN npm ci --only=production
 # Copy App Source Files
 COPY . .
 
-#Expose port 8808
+#Exposing port 8808
 EXPOSE 8808
 
 # Run the app
