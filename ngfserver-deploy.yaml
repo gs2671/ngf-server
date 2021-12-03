@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngfserver
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ngfserver
+    spec:
+      containers:
+      - name: ngfservercontainer
+        image: theguru316/ngf-server:1.0
+        ports:
+        - containerPort: 8808
+        env:
+        - name: NODEJS_URLS
+          value: http://*:8808
+  selector:
+    matchLabels:
+      app: ngfserver
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngfserver
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8808
+  selector:
+    app: ngfserver
+
